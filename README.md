@@ -20,22 +20,7 @@ Broken down into three analytical sub-questions:
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    A[Raw CSV Data<br/>Credit Card Transactions] -->|Upload| B[(Amazon S3<br/>Raw Zone)]
-    B --> C[AWS Glue ETL Job<br/>Spark Cleaning<br/>Fix unescaped quotes / column misalignment]
-    C -->|Write Parquet| D[(Amazon S3<br/>Cleaned Zone<br/>cleaned_data/transactions/)]
-    D --> E[Glue Crawler<br/>crawler-cleaned-transactions]
-    E -->|Generate Schema| F[(Glue Data Catalog<br/>financial_db.cleaned_transactions)]
-    F --> G[Amazon Athena<br/>SQL Query & Validation]
-    G --> H[Power BI<br/>3-Page Dashboard]
-
-    style B fill:#e8f4fd,stroke:#4a90d9
-    style D fill:#e8f4fd,stroke:#4a90d9
-    style F fill:#fff3cd,stroke:#d9a441
-    style G fill:#d4edda,stroke:#4ac47a
-    style H fill:#f8d7da,stroke:#d94a6a
-```
+![Architecture Diagram](docs/architecture.png)
 
 **Pipeline overview:**
 
